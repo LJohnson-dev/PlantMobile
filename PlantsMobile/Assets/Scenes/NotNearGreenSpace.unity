@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b258fa3d9756fcd4bb69bedc38c0c7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FilePath: C:\Users\Lucy\Downloads\map.osm
+  m_FilePath: C:\UniWork\Advanced Tech\PlantMobile\map.osm
 --- !u!4 &1673839972
 Transform:
   m_ObjectHideFlags: 0
