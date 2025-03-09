@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class NearGreenspaceScreen : MonoBehaviour
 {
-    public Image seedPopup;
+    [SerializeField] private Image seedPopup;
     [SerializeField] private Button seedPopupButton;
+
     private PlantData popupReceivedPlant;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class NearGreenspaceScreen : MonoBehaviour
     public void OnButtonClick()
     {
         seedPopupButton.gameObject.SetActive(false);
-        Inventory.Instance.AddToInventory(popupReceivedPlant.SeedName, 1);
+        InventoryManager.Instance.AddToInventory(popupReceivedPlant.SeedName, 1);
         popupReceivedPlant = null;
     }
 }

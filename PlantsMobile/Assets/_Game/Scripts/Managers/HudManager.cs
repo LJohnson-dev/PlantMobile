@@ -11,21 +11,20 @@ public enum HUDDefinition
 
 public class HudManager : MonoBehaviour
 {
-    public static HudManager instance;
+    public static HudManager Instance;
     public GameObject[] HudDefinitions = new GameObject[0]; 
     
 
     // Start is called before the first frame update
     void Start()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             DestroyImmediate(gameObject);
         }
         else
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            Instance = this;
         }
     }
 
@@ -36,11 +35,5 @@ public class HudManager : MonoBehaviour
             bool newState = (int)targetHUD == i;
             HudDefinitions[i].SetActive(newState);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

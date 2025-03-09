@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
-    public static Inventory Instance;
+    public static InventoryManager Instance;
 
     private Dictionary<string, int> m_Items = new Dictionary<string, int>(); // Item name -> count ("RoseSeeds" -> 2)
 
@@ -23,12 +23,15 @@ public class Inventory : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+    }
 
-            // Make an entry for all seeds and start them at 0
-            foreach(PlantData type in PlantManager.instance.plantTypes)
-            {
-                m_Items.Add(type.SeedName, 0);
-            }
+    private void Start()
+    {
+        // Make an entry for all seeds and start them at 0
+        foreach (PlantData type in PlantManager.instance.plantTypes)
+        {
+            m_Items.Add(type.SeedName, 0);
         }
     }
 

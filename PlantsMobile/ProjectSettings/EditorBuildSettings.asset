@@ -5,18 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/NearGreenspace.unity
+    path: Assets/_Game/Scenes/MainScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
-  - enabled: 1
-    path: Assets/Scenes/Garden.unity
-    guid: 07359351356e96047a6273897e42c45e
-  - enabled: 1
-    path: Assets/Scenes/NotNearGreenSpace.unity
-    guid: 96659293b099667438880ff308786a80
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 5ef54caaa9b34174cb2605d0d1bf34db, type: 2}
   m_UseUCBPForAssetBundles: 0

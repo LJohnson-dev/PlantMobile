@@ -15,7 +15,7 @@ public class GardenSeedButton : MonoBehaviour
         m_CurrentSeedType = newTarget;
         m_SeedImage.sprite = newTarget.m_growthStages[0];
 
-        Inventory.Instance.OnItemCountChange += Instance_OnItemCountChange;
+        InventoryManager.Instance.OnItemCountChange += Instance_OnItemCountChange;
         UpdateText();
     }
 
@@ -31,7 +31,7 @@ public class GardenSeedButton : MonoBehaviour
     {
         if(m_CurrentSeedType == null) return;
 
-        int count = Inventory.Instance.GetItemCount(m_CurrentSeedType.SeedName);
+        int count = InventoryManager.Instance.GetItemCount(m_CurrentSeedType.SeedName);
         m_SeedCountText.text = $"x{count}";
 
         gameObject.SetActive(count != 0);
