@@ -8,8 +8,12 @@ public class Inventory : MonoBehaviour
 
     private Dictionary<string, int> m_Items = new Dictionary<string, int>(); // Item name -> count ("RoseSeeds" -> 2)
 
-    // Start is called before the first frame update
-    void Start()
+    public delegate void OnItemCountChanged(string itemName, int newCount, int oldCount);
+
+    public event OnItemCountChanged OnItemCountChange;
+
+
+    void Awake()
     {
         if (Instance != null)
         {
@@ -32,10 +36,13 @@ public class Inventory : MonoBehaviour
     {
         if(!m_Items.ContainsKey(itemName))
         {
-            m_Items.Add(itemName, count);
-            return;
+            m_Items.Add(itemName, 0);
         }
+
+        int oldCount = m_Items[itemName];
         m_Items[itemName] += count;
+
+        OnItemCountChange(itemName, m_Items[itemName], oldCount);
     }
 
     public void RemoveFromInventory(string itemName, int count)
@@ -45,6 +52,20 @@ public class Inventory : MonoBehaviour
             Debug.LogError($"{itemName} was not an entry in Inventory");
             return;
         }
+
+        int oldCount = m_Items[itemName];
         m_Items[itemName] -= count;
+
+        OnItemCountChange(itemName, m_Items[itemName], oldCount);
+    }
+
+    public int GetItemCount(string itemName)
+    {
+        if(!m_Items.ContainsKey(itemName))
+        {
+            return 0;
+        }
+
+        return m_Items[itemName];
     }
 }

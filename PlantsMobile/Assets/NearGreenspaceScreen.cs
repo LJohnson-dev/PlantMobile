@@ -15,12 +15,6 @@ public class NearGreenspaceScreen : MonoBehaviour
         CreateSeedPopup();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void CreateSeedPopup()
     {
         seedPopupButton.gameObject.SetActive(true);
