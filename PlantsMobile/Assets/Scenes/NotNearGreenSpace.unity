@@ -703,6 +703,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127869493}
   m_CullTransparentMesh: 1
+--- !u!1 &1148524747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1148524749}
+  - component: {fileID: 1148524748}
+  m_Layer: 0
+  m_Name: PlantManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1148524748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148524747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05744f087d67f24295e49776f96cf8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantTypes: []
+  plantPrefab: {fileID: 0}
+--- !u!4 &1148524749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148524747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.157713, y: 8.01177, z: 19.788666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1289507873
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b258fa3d9756fcd4bb69bedc38c0c7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FilePath: C:\UniWork\Advanced Tech\PlantMobile\map.osm
+  m_RelativeFilePath: 
 --- !u!4 &1673839972
 Transform:
   m_ObjectHideFlags: 0
@@ -1042,3 +1088,4 @@ SceneRoots:
   - {fileID: 855825279}
   - {fileID: 1030623809}
   - {fileID: 1673839972}
+  - {fileID: 1148524749}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c9947e8929485f4c9c66e7ebf3c3e72, type: 3}
+  m_Name: PurplePlant
+  m_EditorClassIdentifier: 
+  m_plantName: PurplePlant
+  m_growthStages:
+  - {fileID: -4132841351710039260, guid: 00b160e2b18ae6641b925d0633937438, type: 3}
+  - {fileID: 9079217217094456909, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}
+  - {fileID: 8533799705166160878, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}
+  - {fileID: 5070639928152447037, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}
+  - {fileID: -1106271134778385036, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}
+  - {fileID: -5284899024582067921, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}
+  - {fileID: -3669161813939782795, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}

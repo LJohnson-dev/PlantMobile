@@ -1,19 +1,23 @@
 using OsmSharp.API;
 using OsmSharp.Streams;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class OSMManager : MonoBehaviour
 {
-    [SerializeField] private string m_FilePath = "C:\\Users\\Lucy\\Downloads\\map.osm";
+    [SerializeField] private string m_RelativeFilePath;
     // Start is called before the first frame update
     void Start()
     {
         GPSManager.instance.RefreshGPSCoordSystem();
 
-        Osm mapData = LoadOsmFileXML(m_FilePath);
+        Osm mapData = LoadOsmFileXML($"{Application.dataPath}/{m_RelativeFilePath}");
+
+
+        //if (var)
+            //mapData.Nodes[0].Tags;
 
         // Contructing map from nodes 
         foreach(OsmSharp.Node node in mapData.Nodes)
@@ -22,8 +26,9 @@ public class OSMManager : MonoBehaviour
 
             Vector2 gpsLoc = new((float)node.Latitude.Value, (float)node.Longitude.Value);
 
-            GameObject newObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject newObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             newObject.transform.SetParent(gameObject.transform);
+            newObject.transform.localScale = Vector3.one * 4;
             newObject.name = $"Node - {node.Id.ToString()}";
             newObject.transform.position = GPSEncoder.GPSToUCS(gpsLoc);
         }

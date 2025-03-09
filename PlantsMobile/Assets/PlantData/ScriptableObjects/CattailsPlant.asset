@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c9947e8929485f4c9c66e7ebf3c3e72, type: 3}
+  m_Name: CattailsPlant
+  m_EditorClassIdentifier: 
+  m_plantName: CattailsPlant
+  m_growthStages:
+  - {fileID: -273913543772524404, guid: 00b160e2b18ae6641b925d0633937438, type: 3}
+  - {fileID: 2695137598380913892, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}
+  - {fileID: -4356226903159861771, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}
+  - {fileID: -2588981142305407796, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}
+  - {fileID: -1791579040363387743, guid: f97924e6e67a2064c94327c1d5ff41e9, type: 3}

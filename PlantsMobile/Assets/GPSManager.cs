@@ -24,11 +24,8 @@ public class GPSManager : MonoBehaviour
         }
         private set
         {
-            if(!m_UseDebugGPSLocation)
-            {
-                RefreshGPSCoordSystem();
-                _gpsPos = value;
-            }
+            _gpsPos = value;
+            RefreshGPSCoordSystem();
         }
     }
     private Vector2 _gpsPos;
