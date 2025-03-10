@@ -274,6 +274,7 @@ MonoBehaviour:
   m_DragButton: {fileID: 7136995689813913026}
   m_SeedImage: {fileID: 7467187975337961535}
   m_SeedCountText: {fileID: 2835460324304086620}
+  m_RectTransform: {fileID: 806352297897404250}
 --- !u!1 &6315246283176386131
 GameObject:
   m_ObjectHideFlags: 0

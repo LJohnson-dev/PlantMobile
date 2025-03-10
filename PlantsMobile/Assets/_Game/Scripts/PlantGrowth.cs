@@ -1,35 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlantGrowth : MonoBehaviour
 {
-    public PlantData plantData; //Ref to PlantData ScriptableObject
-
     private int currentGrowthStage = 0; //Track current growth stage
-    private SpriteRenderer spriteRenderer;
+    private Image m_Image;
+    private PlantData m_PlantData; //Ref to PlantData ScriptableObject
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        m_Image = GetComponent<Image>();
+    }
+
+    public void SetPlantData(PlantData plantData)
+    {
+        m_PlantData = plantData;
         UpdateGrowthStage();
     }
 
     // Update is called once per frame
     void UpdateGrowthStage()
     {
-        if(currentGrowthStage < plantData.m_growthStages.Length)
+        if(currentGrowthStage < m_PlantData.m_growthStages.Length)
         {
-            spriteRenderer.sprite = plantData.m_growthStages[currentGrowthStage];
+            m_Image.sprite = m_PlantData.m_growthStages[currentGrowthStage];
         }
     }
 
     public void IncrementGrowth()
     {
-        if(currentGrowthStage < plantData.m_growthStages.Length - 1)
+        if(currentGrowthStage < m_PlantData.m_growthStages.Length - 1)
         {
             currentGrowthStage++;
+            UpdateGrowthStage();
+        }
+    }
+
+    public void DecrementGrowth()
+    {
+        if (currentGrowthStage > 0)
+        {
+            currentGrowthStage--;
             UpdateGrowthStage();
         }
     }

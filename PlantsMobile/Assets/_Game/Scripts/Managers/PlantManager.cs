@@ -6,8 +6,8 @@ public class PlantManager : MonoBehaviour
 {
     public static PlantManager instance;
     public List<PlantData> plantTypes;   // List of all plant types
-    public PlantGrowth plantPrefab;     
-
+    public PlantGrowth plantPrefab;
+    [SerializeField] private GameObject m_PlantsRoot;
     private List<PlantGrowth> activePlants = new List<PlantGrowth> (); //List of all active plant instances
 
     
@@ -24,13 +24,14 @@ public class PlantManager : MonoBehaviour
         }
     }
 
-   public void PlacePlant(PlantData selectedPlantData)
+   public void PlacePlant(PlantData selectedPlantData, Vector2 pos)
     {
         //Instantiate a new plant from the prefab
-        PlantGrowth newPlant = Instantiate(plantPrefab);
+        PlantGrowth newPlant = Instantiate(plantPrefab, m_PlantsRoot.transform);
+        newPlant.gameObject.transform.position = pos;
 
         // Assign the selected PlantData to the new plant
-        newPlant.plantData = selectedPlantData;
+        newPlant.SetPlantData(selectedPlantData);
 
         activePlants.Add(newPlant); // Add new plant to list of active plants  
     }
@@ -50,12 +51,33 @@ public class PlantManager : MonoBehaviour
         return plantTypes[randomIndex];
     }
 
-    
+    private void OnGUI()
+    {
+        GUILayout.BeginVertical();
+        if(GUILayout.Button("Increment"))
+        {
+            IncrementAllPlantsGrowth();
+        }
+        if (GUILayout.Button("Decrement"))
+        {
+            DecrementAllPlantsGrowth();
+        }
+        GUILayout.EndVertical();
+    }
+
     void IncrementAllPlantsGrowth()
     {
         foreach (PlantGrowth plant in activePlants)
         {
             plant.IncrementGrowth();
+        }
+    }
+
+    void DecrementAllPlantsGrowth()
+    {
+        foreach (PlantGrowth plant in activePlants)
+        {
+            plant.DecrementGrowth();
         }
     }
 }

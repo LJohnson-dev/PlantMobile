@@ -29,5 +29,6 @@ public class NearGreenspaceScreen : MonoBehaviour
         seedPopupButton.gameObject.SetActive(false);
         InventoryManager.Instance.AddToInventory(popupReceivedPlant.SeedName, 1);
         popupReceivedPlant = null;
+        CreateSeedPopup();
     }
 }

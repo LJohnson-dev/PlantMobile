@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public enum HUDDefinition
 
 public class HudManager : MonoBehaviour
 {
+    [SerializeField] private HUDDefinition StartScreen;
+
     public static HudManager Instance;
     public GameObject[] HudDefinitions = new GameObject[0]; 
     
@@ -25,6 +28,8 @@ public class HudManager : MonoBehaviour
         else
         {
             Instance = this;
+
+            SetActiveHUD(StartScreen);
         }
     }
 
@@ -35,5 +40,10 @@ public class HudManager : MonoBehaviour
             bool newState = (int)targetHUD == i;
             HudDefinitions[i].SetActive(newState);
         }
+    }
+
+    public void SetActiveHUD(int targetHUD)
+    {
+        SetActiveHUD((HUDDefinition)targetHUD);
     }
 }
