@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b258fa3d9756fcd4bb69bedc38c0c7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DebugNodePrefab: {fileID: -5889458256121171399, guid: 037646fa9c8fb9a448016a1f89b66b86, type: 3}
   m_RelativeFilePath: _Game/Data/MapData/UWEFrenchay/UWEFrenchayN.osm

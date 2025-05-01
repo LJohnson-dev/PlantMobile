@@ -11,12 +11,11 @@ public class NearGreenspaceScreen : MonoBehaviour
     private PlantData popupReceivedPlant;
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         CreateSeedPopup();
+        PlantManager.instance.IncrementAllPlantsGrowth();
     }
-
     public void CreateSeedPopup()
     {
         seedPopupButton.gameObject.SetActive(true);
@@ -29,6 +28,5 @@ public class NearGreenspaceScreen : MonoBehaviour
         seedPopupButton.gameObject.SetActive(false);
         InventoryManager.Instance.AddToInventory(popupReceivedPlant.SeedName, 1);
         popupReceivedPlant = null;
-        CreateSeedPopup();
     }
 }

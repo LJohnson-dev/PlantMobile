@@ -45,7 +45,7 @@ public class InventoryManager : MonoBehaviour
         int oldCount = m_Items[itemName];
         m_Items[itemName] += count;
 
-        OnItemCountChange(itemName, m_Items[itemName], oldCount);
+        OnItemCountChange?.Invoke(itemName, m_Items[itemName], oldCount);
     }
 
     public void RemoveFromInventory(string itemName, int count)

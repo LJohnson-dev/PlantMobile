@@ -6,7 +6,7 @@ public class GPSManager : MonoBehaviour
 {
     public static GPSManager instance;
 
-    [SerializeField] Vector2 m_DebugGPSLocation = Vector2.zero;
+    public Vector2 DebugGPSLocation;
     [SerializeField] bool m_UseDebugGPSLocation = false;
 
     public Vector2 GPSPos 
@@ -15,9 +15,7 @@ public class GPSManager : MonoBehaviour
         {
             if (m_UseDebugGPSLocation)
             {
-                // Setting origin to current player GPSpos for accuracy
-                GPSEncoder.SetLocalOrigin(m_DebugGPSLocation);
-                return m_DebugGPSLocation;
+                return DebugGPSLocation;
             }
 
             return _gpsPos;
@@ -25,7 +23,6 @@ public class GPSManager : MonoBehaviour
         private set
         {
             _gpsPos = value;
-            RefreshGPSCoordSystem();
         }
     }
     private Vector2 _gpsPos;

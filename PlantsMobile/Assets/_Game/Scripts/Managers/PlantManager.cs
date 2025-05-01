@@ -65,7 +65,7 @@ public class PlantManager : MonoBehaviour
         GUILayout.EndVertical();
     }
 
-    void IncrementAllPlantsGrowth()
+    public void IncrementAllPlantsGrowth()
     {
         foreach (PlantGrowth plant in activePlants)
         {

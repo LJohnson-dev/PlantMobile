@@ -3,75 +3,135 @@ using OsmSharp.Streams;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class OSMManager : MonoBehaviour
 {
+    [SerializeField] private DebugOSMNode m_DebugNodePrefab = null;
     [SerializeField] private string m_RelativeFilePath;
+
+    private Dictionary<string, List<string>> m_GreenSpaceTagIdentifiers = new Dictionary<string, List<string>>()
+    {
+        {"natural", new List<string>(){"wood", "farm" } },
+        {"landuse", new List<string>(){"grass" } },
+        {"leaf_type", new List<string>(){"*" } },
+    };
+
+    // Generated from BuildMapData
+    private Dictionary<long, OsmSharp.Node> m_NodeLUT = new Dictionary<long, OsmSharp.Node>();
+    private List<OsmSharp.Node> m_GreenspaceNodes = new List<OsmSharp.Node>();
+    private HashSet<long> m_GreenspaceNodeIDs = new HashSet<long>();
+
+    // Debug
+    private DebugOSMNode m_Player = null;
+
     // Start is called before the first frame update
     void Start()
     {
+        m_Player = Instantiate(m_DebugNodePrefab, gameObject.transform);
+        m_Player.name = "DebugPlayer";
+        m_Player.SetColour(Color.yellow);
+
         GPSManager.instance.RefreshGPSCoordSystem();
 
         Osm mapData = LoadOsmFileXML($"{Application.dataPath}/{m_RelativeFilePath}");
 
+        BuildMapData(mapData);
+    }
 
-        //if (var)
-            //mapData.Nodes[0].Tags;
+    private void BuildMapData(Osm mapData)
+    {
+        m_NodeLUT.Clear();
+        m_GreenspaceNodes.Clear();
 
-        // Contructing map from nodes 
-        foreach(OsmSharp.Node node in mapData.Nodes)
+        // Create lookup for ID -> OsmSharp.Node
+        foreach (OsmSharp.Node node in mapData.Nodes)
         {
-            if(node.Latitude == null || node.Longitude == null) continue;
-
-            Vector2 gpsLoc = new((float)node.Latitude.Value, (float)node.Longitude.Value);
-
-            GameObject newObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            newObject.transform.SetParent(gameObject.transform);
-            newObject.transform.localScale = Vector3.one * 4;
-            newObject.name = $"Node - {node.Id.ToString()}";
-            newObject.transform.position = GPSEncoder.GPSToUCS(gpsLoc);
+            m_NodeLUT.Add(node.Id.Value, node);
+            if(HasGreenspaceTag(node.Tags))
+            {
+                m_GreenspaceNodes.Add(node);
+                m_GreenspaceNodeIDs.Add(node.Id.Value);
+            }
         }
 
-        return;
-
-        foreach(OsmSharp.Way currentWay in mapData.Ways)
+        foreach (OsmSharp.Way currentWay in mapData.Ways)
         {
-            bool isCurrentWayGreenSpace = false;
-
             if (currentWay.Tags == null)
             {
                 continue;
             }
 
-            else
+            if (HasGreenspaceTag(currentWay.Tags))
             {
-                foreach (OsmSharp.Tags.Tag tag in currentWay.Tags)
+                for (int i = 0; i < currentWay.Nodes.Length; ++i)
                 {
-                    if (tag.Key == "natural")
-                    {
-                        if (tag.Value == "wood")
-                        {
-                            isCurrentWayGreenSpace = true;
-                        }
-                    }
+                    long nodeID = currentWay.Nodes[i];
+                    OsmSharp.Node currentNode = m_NodeLUT[nodeID];
+
+                    m_GreenspaceNodes.Add(currentNode);
+                    m_GreenspaceNodeIDs.Add(nodeID);
                 }
             }
+        }
 
-            if(isCurrentWayGreenSpace)
-            {
-                //greenspace!
-                
-            }
+        // Debug
+        foreach (OsmSharp.Node node in mapData.Nodes)
+        {
+            if (node.Latitude == null || node.Longitude == null) continue;
+
+            Vector2 gpsLoc = new((float)node.Latitude.Value, (float)node.Longitude.Value);
+
+            bool isGreenspace = m_GreenspaceNodeIDs.Contains(node.Id.Value);
+
+            DebugOSMNode newNode = Instantiate(m_DebugNodePrefab, gameObject.transform);
+            newNode.name = $"Node - {node.Id.ToString()}";
+            newNode.transform.position = GPSEncoder.GPSToUCS(gpsLoc);
+            newNode.SetColour(isGreenspace ? Color.green : Color.gray);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Vector3 newPos = m_Player.transform.position;
+        newPos.y = 10;
+        m_Player.transform.position = newPos;
+        GPSManager.instance.DebugGPSLocation = GPSEncoder.USCToGPS(m_Player.transform.position);
     }
 
+    private bool HasGreenspaceTag(OsmSharp.Tags.TagsCollectionBase tagCollection)
+    {
+        if(tagCollection == null) return false;
+
+        foreach (OsmSharp.Tags.Tag tag in tagCollection)
+        {
+            if (m_GreenSpaceTagIdentifiers.ContainsKey(tag.Key))
+            {
+                if (m_GreenSpaceTagIdentifiers[tag.Key].Contains("*"))
+                {
+                    return true;
+                }
+
+                List<string> allowedValues = m_GreenSpaceTagIdentifiers[tag.Key];
+                foreach (string allowedValue in allowedValues)
+                {
+                    if (tag.Value == allowedValue)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public List<OsmSharp.Node> GetGreenspaceNodes()
+    {
+        return m_GreenspaceNodes;
+    }
 
     public static Osm LoadOsmFileXML(string filePath)
     {

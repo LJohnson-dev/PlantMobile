@@ -16,6 +16,7 @@ public class HudManager : MonoBehaviour
 
     public static HudManager Instance;
     public GameObject[] HudDefinitions = new GameObject[0]; 
+    public HUDDefinition ActiveHUD { get; private set; }
     
 
     // Start is called before the first frame update
@@ -35,11 +36,12 @@ public class HudManager : MonoBehaviour
 
     public void SetActiveHUD(HUDDefinition targetHUD)
     {
-        for(int i = 0; i < HudDefinitions.Length; i++)
+        for (int i = 0; i < HudDefinitions.Length; i++)
         {
             bool newState = (int)targetHUD == i;
             HudDefinitions[i].SetActive(newState);
         }
+        ActiveHUD = targetHUD;
     }
 
     public void SetActiveHUD(int targetHUD)
