@@ -2,15 +2,12 @@ using OsmSharp.API;
 using OsmSharp.Streams;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
-using Unity.VisualScripting;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class OSMManager : MonoBehaviour
 {
     [SerializeField] private DebugOSMNode m_DebugNodePrefab = null;
-    [SerializeField] private string m_RelativeFilePath;
+    [SerializeField] private string m_ResourcesRelativeFilePath;
 
     private Dictionary<string, List<string>> m_GreenSpaceTagIdentifiers = new Dictionary<string, List<string>>()
     {
@@ -36,7 +33,7 @@ public class OSMManager : MonoBehaviour
 
         GPSManager.instance.RefreshGPSCoordSystem();
 
-        Osm mapData = LoadOsmFileXML($"{Application.dataPath}/{m_RelativeFilePath}");
+        Osm mapData = LoadOsmFileXML(m_ResourcesRelativeFilePath);
 
         BuildMapData(mapData);
     }
@@ -135,9 +132,21 @@ public class OSMManager : MonoBehaviour
 
     public static Osm LoadOsmFileXML(string filePath)
     {
-        using (FileStream fileStream = File.OpenRead(filePath))
+        TextAsset file = (TextAsset)Resources.Load(filePath, typeof(TextAsset));
+        if(file == null)
         {
-            var sourceStream = new XmlOsmStreamSource(fileStream);
+            Debug.LogError($"Couldn't load file from Resources {filePath}");
+            return null;
+        }
+
+        using (var stream = new MemoryStream())
+        {
+            var writer = new StreamWriter(stream);
+            writer.Write(file.text);
+            writer.Flush();
+            stream.Position = 0;
+
+            var sourceStream = new XmlOsmStreamSource(stream);
 
             Osm osm = new Osm();
 

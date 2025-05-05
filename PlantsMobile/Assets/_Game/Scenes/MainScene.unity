@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: bfd0e8e19c3ed4b47ba0903c223d16b3, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -226,7 +226,6 @@ RectTransform:
   - {fileID: 1818001179}
   - {fileID: 1196151812}
   - {fileID: 224733471}
-  - {fileID: 1990293514}
   m_Father: {fileID: 490898561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -838,6 +837,7 @@ RectTransform:
   - {fileID: 1360500207}
   - {fileID: 150790015}
   - {fileID: 1646347714}
+  - {fileID: 1990293514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1849,7 +1849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1646347714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2478,7 +2478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -21, y: 32.00003}
+  m_AnchoredPosition: {x: -21, y: 32}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818001180
@@ -2625,7 +2625,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 150790015}
+  m_Father: {fileID: 490898561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -2963,6 +2963,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1369565482537186186, guid: f9fd0ba4d931ae3409e321dac4c2f2fa, type: 3}
+      propertyPath: DebugGPSLocation.x
+      value: 51.50306
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369565482537186186, guid: f9fd0ba4d931ae3409e321dac4c2f2fa, type: 3}
+      propertyPath: DebugGPSLocation.y
+      value: -2.5450284
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369565482537186186, guid: f9fd0ba4d931ae3409e321dac4c2f2fa, type: 3}
+      propertyPath: m_UseDebugGPSLocation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1567679914717432503, guid: f9fd0ba4d931ae3409e321dac4c2f2fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 107.47091
@@ -3020,6 +3032,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 363544858840457960, guid: 0d60436bc08b4dc499c10881f59adf3f, type: 3}
+      propertyPath: m_RelativeFilePath
+      value: MapData/Home/Home
+      objectReference: {fileID: 0}
+    - target: {fileID: 363544858840457960, guid: 0d60436bc08b4dc499c10881f59adf3f, type: 3}
+      propertyPath: m_ResourcesRelativeFilePath
+      value: MapData/UWEFrenchay/UWEFrenchayN
+      objectReference: {fileID: 0}
     - target: {fileID: 4089880788509738969, guid: 0d60436bc08b4dc499c10881f59adf3f, type: 3}
       propertyPath: m_Name
       value: OSMManager
